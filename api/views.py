@@ -1,4 +1,5 @@
 from rest_framework.views import APIView
+from rest_framework.filters import SearchFilter
 from rest_framework.response import Response
 from rest_framework import viewsets, status
 from rest_framework.permissions import IsAuthenticated
@@ -40,4 +41,6 @@ class LoginView(APIView):
 class ItemViewSet(viewsets.ModelViewSet):
     queryset = Item.objects.all()
     serializer_class = ItemSerializer
+    filter_backends = [SearchFilter]
+    search_fields = ['name', 'description']
     permission_classes = [IsAuthenticated]
